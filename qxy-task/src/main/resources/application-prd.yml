@@ -1,0 +1,52 @@
+# 数据源更多配置信息
+config:
+    datasource:
+        filters: stat,wall
+        initialSize: 5
+        maxActive: 100
+        maxPoolPreparedStatementPerConnectionSize: -1
+        maxWait: 60000
+        minEvictableIdleTimeMillis: 300000
+        minIdle: 5
+        poolPreparedStatements: false
+        testOnBorrow: false
+        testOnReturn: false
+        testWhileIdle: true
+        timeBetweenEvictionRunsMillis: 60000
+        validationQuery: SELECT 1 FROM DUAL
+# 更多数据源
+custom:
+    datasource:
+        ds-read:
+            driver-class-name: com.mysql.jdbc.Driver
+            password: root
+            type: com.alibaba.druid.pool.DruidDataSource
+            url: jdbc:mysql://127.0.0.1:3306/xlspre?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+            username: root
+        names: ds-read
+
+#mybatis xml文件位置
+mybatis:
+    mapperLocations: classpath:mapper/**/*.xml
+#数据库连接信息
+spring:
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        name: master
+        password: root
+        type: com.alibaba.druid.pool.DruidDataSource
+        url: jdbc:mysql://127.0.0.1:3306/xlspre?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+        username: root
+# Redis 配置
+    redis:
+        database: 0
+        host: 47.93.43.48
+        lettuce:
+            pool:
+                max-active: -1
+                max-idle: 8
+                max-wait: -1
+                min-idle: 0
+            shutdown-timeout: 100
+        password: WoGinq77mvW3lQ
+        port: 6380

@@ -1,0 +1,54 @@
+server:
+    port: 8081
+spring:
+    profiles:
+        active: '@profileActive@'
+
+
+pagehelper:
+#分页合理化参数，默认值为false。当该参数设置为 true 时，pageNum<=0 时会查询第一页，pageNum>pages（超过总数时），会查询最后一页。默认false 时，直接根据参数进行查询。
+  reasonable: true
+#支持通过 Mapper 接口参数来传递分页参数，默认值false，分页插件会从查询方法的参数值中，自动根据上面 params 配置的字段中取值，查找到合适的值时就会自动分页。
+  support-methods-arguments: true
+#为了支持startPage(Object params)方法，增加了该参数来配置参数映射，用于从对象中根据属性名取值， 可以配置 pageNum,pageSize,count,pageSizeZero,reasonable，不配置映射的用默认值， 默认值为pageNum=pageNum;pageSize=pageSize;count=countSql;reasonable=reasonable;pageSizeZero=pageSizeZero。
+  params: count=countSql
+#默认值为 false，当该参数设置为 true 时，如果 pageSize=0 或者 RowBounds.limit = 0 就会查询出全部的结果（相当于没有执行分页查询，但是返回结果仍然是 Page 类型）。
+  pageSizeZero: true
+  #支持的数据库
+  helper-dialect: mysql
+
+#小程序登录超时设置 #毫秒  86400000 = 24小时
+jwt:
+  seller:
+    sec: test
+    tokenName: sellerToken
+    ttlMillis: 86400000
+#运营中心后台登录超时设置 #毫秒  6000000 = 100分钟
+  admin:
+    sec: test
+    tokenName: accessToken
+    ttlMillis: 6000000
+
+#控制台打印sql日志
+logging:
+  level:
+    com:
+      quxueyuan:
+        server:
+          dao: debug
+
+login:
+  useFilter: true
+
+#阿里上传
+alibaba:
+  oss:
+    bucket: juzifenqi-xinlingshou-test
+    accessKeyId: LTAIaIiLBgiZ5x3l
+    endPoint: https://oss-cn-beijing.aliyuncs.com
+    accessKeySecret: VoGgwwVv2loY9XAlf4b8mGOukPfT1n
+
+# redisson lock
+redisson:
+  password: ${spring.redis.password}
+  address: redis://${spring.redis.host}:${spring.redis.port}

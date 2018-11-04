@@ -1,0 +1,34 @@
+server:
+    port: 8084
+spring:
+    profiles:
+        active: '@profileActive@'
+
+#小程序登录超时设置 #毫秒  86400000 = 24小时
+jwt:
+  seller:
+    sec: test
+    tokenName: sellerToken
+    ttlMillis: 86400000
+#运营中心后台登录超时设置 #毫秒  6000000 = 100分钟
+  admin:
+    sec: test
+    tokenName: accessToken
+    ttlMillis: 6000000
+
+login:
+  useFilter: true
+
+#阿里上传
+alibaba:
+  oss:
+    bucket: juzifenqi-xinlingshou-test
+    accessKeyId: LTAIaIiLBgiZ5x3l
+    endPoint: https://oss-cn-beijing.aliyuncs.com
+    accessKeySecret: VoGgwwVv2loY9XAlf4b8mGOukPfT1n
+
+# redisson lock
+redisson:
+  password: ${spring.redis.password}
+  address: redis://${spring.redis.host}:${spring.redis.port}
+
