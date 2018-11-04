@@ -7,9 +7,9 @@ import java.io.Serializable;
 
 /**
  * @Title: TouchCodeException
- * @Company: 北京桔子分期电子商务有限公司
- * @Author Li Zhe lizhe@juzifenqi.com
- * @Date 2018年07月20日 15:09
+ * @Company: vipkid
+ * @Author liuwei
+ * @Date 2018年10月23日 10:09
  * @Description: TODO(用一句话描述该文件做什么)
  */
 public class TouchCodeException extends RuntimeException implements Serializable {

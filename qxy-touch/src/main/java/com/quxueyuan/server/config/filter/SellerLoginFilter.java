@@ -89,11 +89,13 @@ public class SellerLoginFilter implements Filter {
             if (isLogin) { //已登录
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
-                TouchResponseModel model = new TouchResponseModel();
-                model.setResult("0");
-                model.setErrorCode(TouchApiCode.TOUCH_API_CODE_9999.getCode());
-                model.setMsg(TouchApiCode.TOUCH_API_CODE_9999.getMsg());
-                response.getWriter().write(JsonMapper.nonDefaultMapper().toJson(model));
+                TouchResponseModel responseModel = new TouchResponseModel();
+                TouchResponseModel.Status status = new TouchResponseModel.Status();
+                status.setCode(TouchApiCode.TOUCH_API_CODE_9999.getCode());
+                status.setDescription(TouchApiCode.TOUCH_API_CODE_9999.getMsg());
+                responseModel.setStatus(status);
+                responseModel.setResult(null);
+                response.getWriter().write(JsonMapper.nonDefaultMapper().toJson(responseModel));
             }
             // 登录过滤器，不使用
         } else {

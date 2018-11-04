@@ -28,7 +28,7 @@ import java.util.Map;
  * <B>公司部门：</B>isoftstone 商务结算部<BR>
  * <B>创建时间：</B>2014年7月1日 下午6:22:18<BR>
  *
- * @author 李云龙 liyunlong002@isoftstone.com
+ * @author liuwei
  * @version 1.0
  */
 public class JsonMapper {

@@ -4,21 +4,26 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 /**
- * @Company: 北京桔子分期电子商务有限公司
- * @Author Li Zhe lizhe@juzifenqi.com
- * @Date 2018年06月29日 18:25
+ * @Company: vipkid
+ * @Author 刘巍
+ * @Date 2018年10月23日 10:05
  * @Description: 返回接口格式
  */
 public class TouchApiResponse {
 
-    private static final String EMPTY = "";
+    private static final String SUCCESS = "success";
+    private static final String ERROR = "error";
 
     public static ResponseEntity<TouchResponseModel> success(Object data) {
-        return success(data, EMPTY);
+        return success(data, SUCCESS);
+    }
+
+    public static ResponseEntity<TouchResponseModel> success() {
+        return success(SUCCESS);
     }
 
     public static ResponseEntity<TouchResponseModel> success(String msg) {
-        return success(EMPTY, msg);
+        return success(SUCCESS, msg);
     }
 
     public static ResponseEntity<TouchResponseModel> success(Object data, String msg) {
@@ -31,27 +36,32 @@ public class TouchApiResponse {
         return new ResponseEntity<TouchResponseModel>(badRequestModel, HttpStatus.OK);
     }
 
+    public static ResponseEntity<TouchResponseModel> failed() {
+        return failed(ERROR);
+    }
+
     public static ResponseEntity<TouchResponseModel> failed(String msg) {
         TouchResponseModel em = new TouchResponseModel();
-        em.setData(null);
-        em.setMsg(msg);
-        //TODO 因结构无法依赖，TouchApiCode枚举类，后期优化
-        em.setErrorCode("0000");
-        em.setResult("0");
+        TouchResponseModel.Status st = new TouchResponseModel.Status();
+        st.setCode(1);
+        st.setDescription(msg);
+        em.setStatus(st);
+        em.setResult("失败");
         return new ResponseEntity<TouchResponseModel>(em, HttpStatus.OK);
     }
 
-    public static ResponseEntity<TouchResponseModel> failed(String code, String msg) {
+    public static ResponseEntity<TouchResponseModel> failed(Integer code, String msg) {
         TouchResponseModel em = new TouchResponseModel();
-        em.setData(null);
-        em.setMsg(msg);
-        em.setErrorCode(code);
-        em.setResult("0");
+        TouchResponseModel.Status st = new TouchResponseModel.Status();
+        st.setCode(code);
+        st.setDescription(msg);
+        em.setStatus(st);
+        em.setResult("失败");
         return new ResponseEntity<TouchResponseModel>(em, HttpStatus.OK);
     }
 
     private static TouchResponseModel successModel(final Object data) {
-        return successModel(data, EMPTY);
+        return successModel(data, SUCCESS);
     }
 
     private static TouchResponseModel successModel(final Object data, final String msg) {
@@ -60,25 +70,21 @@ public class TouchApiResponse {
 
     private static TouchResponseModel successModelBase(final Object data, final String msg) {
         TouchResponseModel sm = new TouchResponseModel();
-        sm.setData(data);
-        sm.setMsg(msg);
-        sm.setResult("1");
+        TouchResponseModel.Status st = new TouchResponseModel.Status();
+        st.setCode(0);
+        st.setDescription(msg);
+        sm.setStatus(st);
+        sm.setResult(data);
         return sm;
-    }
-
-    private static TouchResponseModel errorModel(final String msg) {
-        TouchResponseModel em = new TouchResponseModel();
-        em.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.value() + "");
-        em.setMsg(msg);
-        return em;
     }
 
     private static TouchResponseModel badRequestModel(String msg) {
         TouchResponseModel bm = new TouchResponseModel();
-        bm.setData(null);
-        bm.setErrorCode("1000");
-        bm.setMsg(msg);
-        bm.setResult("0");
+        TouchResponseModel.Status st = new TouchResponseModel.Status();
+        st.setCode(1);
+        st.setDescription(msg);
+        bm.setStatus(st);
+        bm.setResult("失败");
         return bm;
     }
 

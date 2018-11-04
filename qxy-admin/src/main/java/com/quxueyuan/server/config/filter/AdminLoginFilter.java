@@ -74,10 +74,11 @@ public class AdminLoginFilter implements Filter {
                     // 报错："getWriter() has already been called for this response"
 //                    filterChain.doFilter(servletRequest,servletResponse);
                     TouchResponseModel responseModel = new TouchResponseModel();
-                    responseModel.setErrorCode("401");
-                    responseModel.setMsg("登录失败");
-                    responseModel.setData(null);
-                    responseModel.setResult("0");
+                    TouchResponseModel.Status status = new TouchResponseModel.Status();
+                    status.setCode(401);
+                    status.setDescription("登录失败");
+                    responseModel.setStatus(status);
+                    responseModel.setResult(null);
                     response.getWriter().write(JsonMapper.nonDefaultMapper().toJson(responseModel));
                 }
                 // 登录过滤器，不使用

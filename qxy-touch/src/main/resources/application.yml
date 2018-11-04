@@ -3,6 +3,9 @@ server:
 spring:
     profiles:
         active: '@profileActive@'
+#    jackson:
+#        time-zone: GMT+8
+#        date-format: yyyy-MM-dd HH:mm:ss
 
 #小程序登录超时设置 #毫秒  86400000 = 24小时
 jwt:
@@ -32,3 +35,30 @@ redisson:
   password: ${spring.redis.password}
   address: redis://${spring.redis.host}:${spring.redis.port}
 
+quxueyuan:
+  auth:
+    checksign: 0
+
+#微信配置信息
+wx:
+  appid: wxcb28da905d8d9741
+  appsecret: 949619a8c2f6dcf13658488eb25a1169
+  #网页授权获取token
+  access_token_auth: https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code
+  #刷新access_token
+  refresh_token: https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=APPID&grant_type=refresh_token&refresh_token=REFRESH_TOKEN
+  #拉取用户信息
+  user_info_auth: https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
+  #验证授权是否有效
+  if_invalid_auth: https://api.weixin.qq.com/sns/auth?access_token=ACCESS_TOKEN&openid=OPENID
+  #获取ticket
+  get_ticket: https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&type=jsapi
+  #api获取token
+  get_access_token: https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET
+
+#腾讯云配置信息
+tencent:
+  appid: 1257948725
+  secretid: AKIDdO1Tfhe5RYR6WlNcHm368FCvOefTbEn6
+  secretkey: CAsLbbOwHNK4ZpMgnob9TYP1PYTFpAHA
+  regionName: ap-beijing

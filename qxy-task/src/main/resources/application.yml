@@ -3,12 +3,10 @@ server:
 spring:
     profiles:
         active: '@profileActive@'
-#quartz相关属性配置
+
     quartz:
         jdbc:
-#初始化表结构
             initialize-schema: never
-#数据库方式
         job-store-type: jdbc
         properties:
             org:

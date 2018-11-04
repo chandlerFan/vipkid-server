@@ -88,15 +88,39 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils {
         return new SimpleDateFormat(formatting);
     }
 
+    public static String formatDate(Date date) {
+        return format(FORMATTING_DATE, date);
+    }
+    public static String format(String pattern, Date date) {
+        if (null == date) {
+            return null;
+        }
+
+        SimpleDateFormat FORMATTER = new SimpleDateFormat();
+        FORMATTER.applyPattern(pattern);
+        return FORMATTER.format(date);
+    }
     /**
      * 获取当前时间
      *
      * @return
      */
-    public static Date getDate() {
+    public static Date getDateTime() {
         return Calendar.getInstance().getTime();
     }
 
+    /**
+     * 获取当前日期
+     * @return
+     */
+    public static Date getDate(){
+        try {
+            return parseDate(formatDate(getDateTime()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public static String getDate(String formatting) {
         return formatting(getDate(), formatting);
@@ -559,7 +583,7 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils {
     /**
      * 得到当前日期和时间字符串 格式（yyyy-MM-dd HH:mm:ss）
      */
-    public static String getDateTime() {
+    public static String getDateTimeStr() {
         return formatDate(new Date(), "yyyy-MM-dd HH:mm:ss");
     }
 
@@ -955,4 +979,26 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils {
         SimpleDateFormat sdf = new SimpleDateFormat(format);
         return sdf.format(new Date());
     }
+    /**
+     * 增加天数
+     *
+     * @param date
+     * @param days
+     * @return
+     */
+    public static Date addDate(Date date, int days) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, days);
+        return calendar.getTime();
+    }
+
+
+    /**
+     * 比较2个日期，第一个日期大于第二个日期 返回 1，  相等 返回0， 小于 返回 -1
+     */
+    public static int compareDate(Date date1, Date date2) {
+        return date1.compareTo(date2);
+    }
+
 }
